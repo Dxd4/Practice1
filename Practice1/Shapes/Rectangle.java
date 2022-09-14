@@ -1,36 +1,39 @@
 package Practice1.Shapes;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Rectangle extends Shape {
-	private int x;
-	private int y;
+	private int left;
+	private int top;
 	private int height;
 	private int width;
 
-	public Rectangle(String color, int x, int y, int height, int width) {
+	public Rectangle(Color color, int left, int top, int height, int width) {
 		super(color);
-		this.x = x;
-		this.y = y;
+		this.left = left;
+		this.top = top;
 		this.height = height;
 		this.width = width;
 	}
 
-	public int getx() {
-		return x;
+	public int getleft() {
+		return left;
 	}
 
-	public void setx(int x) {
-		this.x = x;
+	public void setleft(int left) {
+		this.left = left;
 	}
 
-	public int gety() {
-		return y;
+	public int gettop() {
+		return top;
 	}
 
-	public void sety(int y) {
-		this.y = y;
+	public void settop(int top) {
+		this.top = top;
 	}
 
-	public int getHeight() {
+	public int getheight() {
 		return height;
 	}
 
@@ -38,7 +41,7 @@ public class Rectangle extends Shape {
 		this.height = height;
 	}
 
-	public int getWidth() {
+	public int getwidth() {
 		return width;
 	}
 
@@ -48,7 +51,28 @@ public class Rectangle extends Shape {
 
 	@Override
 	public void draw() {
-		System.out.printf("Rectangle color: %s, x: %d, y: %d, height: %d, width: %d\n", this.getColor(), this.getx(), this.gety(), this.getHeight(), this.getWidth());
+		System.out.printf("Rectangle color: %s, left: %d, top: %d, height: %d, width: %d\n", this.getColor().toString(), this.getleft(), this.gettop(), this.getheight(), this.getwidth());
+		// creating object of JFrame(Window popup)
+		JFrame window = new JFrame();
+
+		// setting size of the pop window
+		window.setBounds(30, 30, getwidth()+getleft()+50, getheight()+gettop()+50);
+
+		// setting canvas for draw
+		window.getContentPane().add(new Rectangle.MyCanvas());
+
+		// set visibility
+		window.setVisible(true);
+	}
+
+	class MyCanvas extends JComponent {
+
+		public void paint(Graphics g)
+		{
+			g.setColor(getColor());
+			g.drawRect(getX(), getY(), getwidth(), getheight());
+			g.fillRect(getX(), getY(), getwidth(), getheight());
+		}
 	}
 
 	@Override
@@ -58,8 +82,8 @@ public class Rectangle extends Shape {
 
 		Rectangle rectangle = (Rectangle) o;
 
-		if (x != rectangle.x) return false;
-		if (y != rectangle.y) return false;
+		if (left != rectangle.left) return false;
+		if (top != rectangle.top) return false;
 		if (height != rectangle.height) return false;
 		return width == rectangle.width;
 	}

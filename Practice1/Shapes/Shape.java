@@ -1,17 +1,19 @@
 package Practice1.Shapes;
 
-public abstract class Shape {
-	private String color;
+import java.awt.*;
 
-	public Shape(String color) {
+public abstract class Shape {
+	private Color color;
+
+	public Shape(Color color) {
 		this.color = color;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
